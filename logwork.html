@@ -1,0 +1,121 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Timesheet Report</title>
+
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
+
+    <script type="application/javascript">
+        $(document).ready(function() {
+            var opt = { dateFormat: 'dd/M/yy' };
+            $("#startDate").datepicker(opt);
+            $("#endDate").datepicker(opt);
+
+            var today = getDate();
+            $('#startDate').val(today);
+            $('#endDate').val(today);
+        });
+
+        function getDate() {
+            return moment().format("DD/MMM/YYYY");
+        }
+
+        function dateRange() {
+            var startDate = $('#startDate').val();
+            var endDate = $('#endDate').val();
+
+            request(startDate, endDate);
+        }
+
+        function today() {
+            request(getDate());
+        }
+
+        function week() {
+            var startDate = $('#startDate').val();
+            var endDate = $('#endDate').val();
+
+            request(startDate, endDate);
+        }
+
+        function request(startDate, endDate) {
+            // Displays HTML report.
+            var url = 'https://jira.elsevier.com/secure/ConfigureReport.jspa?targetGroup=&excludeTargetGroup=&projectRoleId=&projectid=13200&filterid=&priority=&sum=&groupByField=&moreFields=&selectedProjectId=13200&reportKey=jira-timesheet-plugin:report&Next=Next';
+
+            // Generates Excel report.
+            // var url = 'https://jira.elsevier.com/secure/ConfigureReport!excelView.jspa?endDate=&targetGroup=&excludeTargetGroup=&projectRoleId=&projectid=13200&filterid=&priority=&sum=&groupByField=&moreFields=&selectedProjectId=13200&reportKey=jira-timesheet-plugin:report&atl_token=A76R-9E6E-8SPH-5831|c2ad87b5daf46fce632374a6dd26da9c08dec7f0|lin&Next=Next';
+
+            url += '&targetUser=' + $('#targetUser').val();
+            url += '&startDate=' + startDate;
+
+            if (!endDate) {
+                endDate = startDate;
+            }
+
+            url += '&endDate=' + endDate;
+
+            window.location = url;
+        }
+    </script>
+    <style>
+        .container {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-primary-spacing {
+            margin-right: 0.5rem
+        }
+
+        .btn {
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <h3 class="mt-5 mb-4">JIRA timesheet report</h3>
+            <form name="form">
+                <div class="form-group row">
+                    <label for="targetUser" class="col-1 col-form-label">User</label>
+                    <div class="col-9">
+                        <input class="form-control" type="text" id="targetUser" value="mmolchanov" placeholder="e.g. mmolchanov">
+                        <small id="passwordHelpBlock" class="form-text text-muted">
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="startDate" class="col-sm-1 col-form-label">From</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" id="startDate" value="" placeholder="e.g. 8/Sep/2017">
+                    </div>
+                    <label for="endDate" class="col-sm-1 col-form-label">To</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" id="endDate" value="" placeholder="e.g. 18/Sep/2017">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                        <button class="btn btn-success btn-primary-spacing" type="button" onclick="today()">Today</button>
+                        <button class="btn btn-primary float-right" type="button" onclick="dateRange()">Date range</button>
+                        <button class="btn btn-info btn-primary-spacing float-right" type="button" onclick="month()">Month</button>
+                        <button class="btn btn-info btn-primary-spacing float-right" type="button" onclick="week()">Week</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
