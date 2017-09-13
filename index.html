@@ -23,6 +23,9 @@
             var today = getDate();
             $('#startDate').val(today);
             $('#endDate').val(today);
+
+            var user = localStorage.getItem('logwork-user');
+            $('#targetUser').val(user);
         });
 
         function getDate() {
@@ -48,6 +51,8 @@
         }
 
         function request(startDate, endDate) {
+            localStorage.setItem('logwork-user', $('#targetUser').val());
+
             // Displays HTML report.
             var url = 'https://jira.elsevier.com/secure/ConfigureReport.jspa?targetGroup=&excludeTargetGroup=&projectRoleId=&projectid=13200&filterid=&priority=&sum=&groupByField=&moreFields=&selectedProjectId=13200&reportKey=jira-timesheet-plugin:report&Next=Next';
 
