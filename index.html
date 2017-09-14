@@ -14,84 +14,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
 
-    <script type="application/javascript">
-        $(document).ready(function() {
-            var opt = { dateFormat: 'dd/M/yy' };
-            $("#startDate").datepicker(opt);
-            $("#endDate").datepicker(opt);
-
-            var today = formatDate();
-            $('#startDate').val(today);
-            $('#endDate').val(today);
-
-            var user = localStorage.getItem('logwork-user');
-            $('#targetUser').val(user);
-        });
-
-        function formatDate(date) {
-            date = date || moment();
-            return date.format("DD/MMM/YYYY");
-        }
-
-        function dateRange() {
-            var startDate = $('#startDate').val();
-            var endDate = $('#endDate').val();
-
-            request(startDate, endDate);
-        }
-
-        function today() {
-            request(formatDate());
-        }
-
-        function yesterday() {
-            request(formatDate(moment().add(-1, 'days')));
-        }
-
-        function week() {
-            var startDate = $('#startDate').val();
-            var endDate = $('#endDate').val();
-
-            request(startDate, endDate);
-        }
-
-        function request(startDate, endDate) {
-            localStorage.setItem('logwork-user', $('#targetUser').val());
-
-            // Displays HTML report.
-            var url = 'https://jira.elsevier.com/secure/ConfigureReport.jspa?targetGroup=&excludeTargetGroup=&projectRoleId=&projectid=13200&filterid=&priority=&sum=&groupByField=&moreFields=&selectedProjectId=13200&reportKey=jira-timesheet-plugin:report&Next=Next';
-
-            // Generates Excel report.
-            // var url = 'https://jira.elsevier.com/secure/ConfigureReport!excelView.jspa?endDate=&targetGroup=&excludeTargetGroup=&projectRoleId=&projectid=13200&filterid=&priority=&sum=&groupByField=&moreFields=&selectedProjectId=13200&reportKey=jira-timesheet-plugin:report&atl_token=A76R-9E6E-8SPH-5831|c2ad87b5daf46fce632374a6dd26da9c08dec7f0|lin&Next=Next';
-
-            url += '&targetUser=' + $('#targetUser').val();
-            url += '&startDate=' + startDate;
-
-            if (!endDate) {
-                endDate = startDate;
-            }
-
-            url += '&endDate=' + endDate;
-
-            window.location = url;
-        }
-    </script>
-    <style>
-        .container {
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .btn-primary-spacing {
-            margin-right: 0.5rem
-        }
-
-        .btn {
-            margin-top: 1rem;
-        }
-    </style>
+    <script src="js/logwork.js"></script>
+    <link rel="stylesheet" href="css/logwork.css">
 </head>
 <body>
     <div class="container">

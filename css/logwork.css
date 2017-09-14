@@ -1,0 +1,14 @@
+.container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-primary-spacing {
+    margin-right: 0.5rem
+}
+
+.btn {
+    margin-top: 1rem;
+}
