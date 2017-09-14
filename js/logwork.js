@@ -3,13 +3,41 @@ $(document).ready(function() {
     input('startDate').datepicker(opt);
     input('endDate').datepicker(opt);
 
-    var today = formatDate();
-    input('startDate').val(today);
-    input('endDate').val(today);
+    var date = formatDate();
+    input('startDate').val(date);
+    input('endDate').val(date);
 
     var user = localStorage.getItem('logwork-user');
     input('targetUser').val(user);
+
+    var query = getQuery();
+    if (query.date === 'today') {
+        today();
+    }
 });
+
+function checkUser() {
+    var el = input('targetUser');
+
+    if (!el.val()) {
+        alert('Please specify Jira user name!');
+        el.focus();
+        return false;
+    }
+
+    return true;
+}
+
+function getQuery() {
+    var query = {};
+
+    location.search.substr(1).split("&").forEach(function(item) {
+        var pair = item.split("=");
+        query[pair[0]] = pair[1];
+    });
+
+    return query;
+}
 
 function input(id) {
     return $('#' + id);
@@ -43,6 +71,10 @@ function week() {
 }
 
 function request(startDate, endDate) {
+    if (!checkUser()) {
+        return;
+    }
+
     localStorage.setItem('logwork-user', input('targetUser').val());
 
     // Displays HTML report.
