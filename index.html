@@ -20,7 +20,7 @@
             $("#startDate").datepicker(opt);
             $("#endDate").datepicker(opt);
 
-            var today = getDate();
+            var today = formatDate();
             $('#startDate').val(today);
             $('#endDate').val(today);
 
@@ -28,8 +28,9 @@
             $('#targetUser').val(user);
         });
 
-        function getDate() {
-            return moment().format("DD/MMM/YYYY");
+        function formatDate(date) {
+            date = date || moment();
+            return date.format("DD/MMM/YYYY");
         }
 
         function dateRange() {
@@ -40,7 +41,11 @@
         }
 
         function today() {
-            request(getDate());
+            request(formatDate());
+        }
+
+        function yesterday() {
+            request(formatDate(moment().add(-1, 'days')));
         }
 
         function week() {
@@ -113,10 +118,15 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-10">
-                        <button class="btn btn-success btn-primary-spacing" type="button" onclick="today()">Today</button>
-                        <button class="btn btn-primary float-right" type="button" onclick="dateRange()">Date range</button>
+                        <button class="btn btn-primary-spacing btn-success " type="button" onclick="today()">Today</button>
+                        <button class="btn btn-outline-primary" type="button" onclick="yesterday()">Yesterday</button>
+
+                        <button class="btn btn-primary float-right" type="button" onclick="dateRange()">View report</button>
+
+                        <!--
                         <button class="btn btn-info btn-primary-spacing float-right" type="button" onclick="month()" disabled title="Not ready yet">Month</button>
                         <button class="btn btn-info btn-primary-spacing float-right" type="button" onclick="week()" disabled title="Not ready yet">Week</button>
+                        -->
                     </div>
                 </div>
             </form>
