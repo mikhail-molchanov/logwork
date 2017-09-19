@@ -94,3 +94,7 @@ function request(startDate, endDate) {
 
     window.location = url;
 }
+
+// Work logging time for PV-2136:
+// https://jira.elsevier.com/secure/CreateWorklog.jspa
+// inline=true&decorator=dialog&worklogId=&id=129445&timeLogged=1h&startDate=19%2FSep%2F17+9%3A38+AM&adjustEstimate=auto&comment=&commentLevel=&atl_token=A76R-9E6E-8SPH-5831%7Cde1af7d6bc17b840d328c22d2077f81d4ed57704%7Clin
