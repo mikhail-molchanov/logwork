@@ -60,14 +60,12 @@ function today() {
 }
 
 function yesterday() {
-    request(formatDate(moment().add(-1, 'days')));
+    var date = formatDate(moment().add(-1, 'days'));
+    request(date, date);
 }
 
 function week() {
-    var startDate = input('startDate').val();
-    var endDate = input('endDate').val();
-
-    request(startDate, endDate);
+    request(formatDate(moment().startOf('isoWeek')));
 }
 
 function request(startDate, endDate) {
@@ -87,7 +85,7 @@ function request(startDate, endDate) {
     url += '&startDate=' + startDate;
 
     if (!endDate) {
-        endDate = startDate;
+        endDate = formatDate();
     }
 
     url += '&endDate=' + endDate;
