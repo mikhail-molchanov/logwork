@@ -64,8 +64,43 @@ function yesterday() {
     request(date, date);
 }
 
-function week() {
-    request(formatDate(moment().startOf('isoWeek')));
+function week(past) {
+    past = past || 0;
+
+    var today = moment();
+    var week = today.subtract(past, 'weeks');
+
+    var start = formatDate(week.startOf('isoWeek'));
+    var end = formatDate(week.endOf('isoWeek'));
+    request(start, end);
+}
+
+function lastWeek(past) {
+    week(1);
+}
+
+function lastFriday() {
+    var date =  formatDate(moment().day(-2));
+    request(date, date);
+}
+
+function month(past) {
+    past = past || 0;
+
+    var today = moment();
+    var month = today.subtract(past, 'months');
+
+    var start = formatDate(month.startOf('month'));
+    var end = past ? formatDate(month.endOf('month')) : today;
+    request(start, end);
+}
+
+function lastMonth() {
+    month(1);
+}
+
+function thisMonth() {
+    month();
 }
 
 function request(startDate, endDate) {
@@ -92,7 +127,3 @@ function request(startDate, endDate) {
 
     window.location = url;
 }
-
-// Work logging time for PV-2136:
-// https://jira.elsevier.com/secure/CreateWorklog.jspa
-// inline=true&decorator=dialog&worklogId=&id=129445&timeLogged=1h&startDate=19%2FSep%2F17+9%3A38+AM&adjustEstimate=auto&comment=&commentLevel=&atl_token=A76R-9E6E-8SPH-5831%7Cde1af7d6bc17b840d328c22d2077f81d4ed57704%7Clin

@@ -19,12 +19,12 @@
 </head>
 <body>
     <div class="container">
-        <div>
+        <div class="form">
             <h3 class="mt-5 mb-4">JIRA timesheet report</h3>
             <form name="form">
                 <div class="form-group row">
                     <label for="targetUser" class="col-1 col-form-label">User</label>
-                    <div class="col-9">
+                    <div class="col-12">
                         <input class="form-control" type="text" id="targetUser" value="" placeholder="e.g. mmolchanov" required>
                         <small id="passwordHelpBlock" class="form-text text-muted">
                         </small>
@@ -32,22 +32,27 @@
                 </div>
                 <div class="form-group row">
                     <label for="startDate" class="col-sm-1 col-form-label">From</label>
-                    <div class="col-sm-4">
+                    <div class="col-sm-5">
                         <input class="form-control" type="text" id="startDate" value="" placeholder="e.g. 8/Sep/2017">
                     </div>
                     <label for="endDate" class="col-sm-1 col-form-label">To</label>
-                    <div class="col-sm-4">
+                    <div class="col-sm-5">
                         <input class="form-control" type="text" id="endDate" value="" placeholder="e.g. 18/Sep/2017">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-sm-10">
+                    <div class="col-sm-12">
                         <button class="btn btn-success btn-spacing" type="button" onclick="today()">Today</button>
                         <button class="btn btn-outline-primary btn-spacing" type="button" onclick="yesterday()">Yesterday</button>
-                        <button class="btn btn-outline-primary" type="button" onclick="week()">Week</button>
+                        <button class="btn btn-outline-primary" type="button" onclick="lastWeek()">Last week</button>
+                        <!-- <button class="btn btn-outline-primary" type="button" onclick="week()">Week</button> -->
+                        <!-- <button class="btn btn-outline-primary" type="button" onclick="lastFriday()">Last Friday</button> -->
 
-                        <button class="btn btn-primary float-right" type="button" onclick="dateRange()">View report</button>
-
+                        <!-- <button class="btn btn-primary float-right" type="button" onclick="dateRange()">View report</button> -->
+                        <div class="float-right">
+                            <button class="btn btn-outline-primary btn-spacing" type="button" onclick="lastMonth()">Last month</button>
+                            <button class="btn btn-primary " type="button" onclick="thisMonth()">This month</button>
+                        </div>
                         <!--
                         <button class="btn btn-info btn-primary-spacing float-right" type="button" onclick="month()" disabled title="Not ready yet">Month</button>
                         <button class="btn btn-info btn-primary-spacing float-right" type="button" onclick="week()" disabled title="Not ready yet">Week</button>

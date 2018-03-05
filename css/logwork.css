@@ -5,6 +5,10 @@
     align-items: center;
 }
 
+.form {
+    width: 40rem
+}
+
 .btn-spacing {
     margin-right: 0.5rem
 }
