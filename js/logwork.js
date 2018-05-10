@@ -79,6 +79,10 @@ function lastWeek(past) {
     week(1);
 }
 
+function thisWeek() {
+    week();
+}
+
 function lastFriday() {
     var date =  formatDate(moment().day(-2));
     request(date, date);
