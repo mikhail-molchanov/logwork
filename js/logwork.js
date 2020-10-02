@@ -128,7 +128,7 @@ function request(startDate, endDate) {
   // Displays HTML report.
   var url =
     jiraHome +
-    "/secure/ConfigureReport.jspa?targetGroup=&excludeTargetGroup=&projectRoleId=&projectid=18401&projectid=13200&filterid=&priority=&sum=&groupByField=&moreFields=&selectedProjectId=13200&reportKey=jira-timesheet-plugin:report&Next=Next";
+    "/secure/ConfigureReport.jspa?targetGroup=&excludeTargetGroup=&projectRoleId=&projectid=18401&projectid=13200&projectid=10131&filterid=&priority=&sum=&groupByField=&moreFields=&selectedProjectId=13200&reportKey=jira-timesheet-plugin:report&Next=Next";
 
   // Generates Excel report.
   // var url = 'https://jira.elsevier.com/secure/ConfigureReport!excelView.jspa?endDate=&targetGroup=&excludeTargetGroup=&projectRoleId=&projectid=13200&filterid=&priority=&sum=&groupByField=&moreFields=&selectedProjectId=13200&reportKey=jira-timesheet-plugin:report&atl_token=A76R-9E6E-8SPH-5831|c2ad87b5daf46fce632374a6dd26da9c08dec7f0|lin&Next=Next';
